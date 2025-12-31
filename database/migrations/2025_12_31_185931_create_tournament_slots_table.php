@@ -11,13 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tourments', function (Blueprint $table) {
+        Schema::create('tournament_slots', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->foreignId('tourment_type_id')->nullable()->constrained('tourment_types')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('organizer')->nullable();
+
+            $table->foreignId('tournament_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->dateTime('starts_at');
+            $table->unsignedInteger('max_players');
+
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tourments');
+        Schema::dropIfExists('tournament_slots');
     }
 };

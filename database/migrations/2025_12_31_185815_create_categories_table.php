@@ -11,21 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('scores', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('code')->unique();
-            $table->string('description')->nullable();
-            $table->integer('points')->default(0);
-            $table->string('instance')->nullable();
+            $table->string('name');
+            $table->string('code')->nullable()->unique();
+            $table->unsignedInteger('order')->default(0);
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('scores');
+        Schema::dropIfExists('categories');
     }
 };

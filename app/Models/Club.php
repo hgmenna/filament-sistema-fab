@@ -5,27 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Federation extends Model
+class Club extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
         'short_name',
-        'country_id',
-        'mail_contact',
-        'website',
+        'city_id',
+        'address',
         'phone',
+        'email_contact',
+        'website',
         'logo_path'
     ];
 
-    public function country()
+    public function city()
     {
-        return $this->belongsTo(\App\Models\Country::class);
+        return $this->belongsTo(\App\Models\City::class);
     }
 
-    public function tournaments()
+    public function players()
     {
-        return $this->hasMany(Tournament::class);
+        return $this->hasMany(Player::class);
     }
 }

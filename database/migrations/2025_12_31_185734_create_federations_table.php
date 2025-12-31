@@ -13,12 +13,18 @@ return new class extends Migration
     {
         Schema::create('federations', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('code', )->unique();
-            $table->string('contact_email')->nullable();
-            $table->string('website_url')->nullable();
+            $table->string('name');
+            $table->string('short_name')->nullable();
+            $table->string('mail_contact')->nullable();
+            $table->string('website')->nullable();
+            $table->string('phone')->nullable();
             $table->string('logo_path')->nullable();
-            $table->string('phone_number')->nullable();
+
+            $table->foreignId('country_id')
+                ->constrained('countries')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+
             $table->timestamps();
         });
     }

@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tourment_types', function (Blueprint $table) {
+        Schema::create('tournament_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('is_ranked')->default(false);
-            $table->boolean('is_asign_points')->default(false);
-            $table->decimal('points-porcentage', 5, 2)->default(0);
+            $table->string('code')->nullable()->unique();
+
+            $table->boolean('is_official')->default(false);
+            $table->boolean('affects_ranking')->default(false);
+            $table->boolean('assigns_points')->default(false);
+
+            $table->decimal('score_percentage', 5, 2)->unsigned()->default(100.00);
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tourment_types');
+        Schema::dropIfExists('tournament_types');
     }
 };

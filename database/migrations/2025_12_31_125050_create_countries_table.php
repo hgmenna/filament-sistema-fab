@@ -39,7 +39,7 @@ return new class extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->index()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('federation_id')->nullable()->index()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            //$table->foreignId('federation_id')->nullable()->index()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->string('name', 100);
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
